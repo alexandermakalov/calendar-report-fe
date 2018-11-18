@@ -46,6 +46,13 @@ export function employeesReducer(state = InitialEmployeeState,
         selected: id
       };
     }
+    case employeeAction.LOAD_EMPLOYEES_SUCCESS: {
+      const newEmployee: Employee[] = action.payload;
+      return {
+        ...state,
+        employees: newEmployee
+      };
+    }
     default:
       return state;
   }

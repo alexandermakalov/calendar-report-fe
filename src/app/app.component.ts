@@ -29,6 +29,7 @@ export class AppComponent {
   constructor(private store: Store<fromRoot.EmployeeState>) {
     this.employees$ = store.select(employeeSelector.getAllEmployees);
     this.selected$ = store.select(employeeSelector.getSelectedEmployee);
+    this.store.dispatch(new employeeAction.LoadEmployees());
   }
 
   onSelect(id: number) {
