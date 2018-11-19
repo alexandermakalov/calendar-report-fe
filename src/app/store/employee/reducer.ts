@@ -9,34 +9,20 @@ export interface EmployeeState {
 }
 
 export const InitialEmployeeState: EmployeeState = {
-  ids: [1, 2, 3],
-  employees: {
-    1: {
-      id: 1,
-      name: 'Interstellar'
-    },
-    2: {
-      id: 2,
-      name: 'Shutter Island'
-    },
-    3: {
-      id: 3,
-      name: 'The Grand Budapest Hotel',
-
-    },
-  },
+  ids: [],
+  employees: {},
   selected: null,
 };
 
 export function employeesReducer(state = InitialEmployeeState,
-                        action: employeeAction.Action) {
+                                 action: employeeAction.Action) {
   switch (action.type) {
     case employeeAction.ADD_ONE: {
       const newEmployee: Employee = action.payload;
       return {
         ...state,
         ids: [...state.ids, newEmployee.id],
-        employees: { ...state.employees, newEmployee }
+        employees: {...state.employees, newEmployee}
       };
     }
     case employeeAction.SELECT: {
@@ -47,16 +33,24 @@ export function employeesReducer(state = InitialEmployeeState,
       };
     }
     case employeeAction.LOAD_EMPLOYEES_SUCCESS: {
-      const newEmployee: Employee[] = action.payload;
+      const newEmployees: Employee[] = action.payload;
+      const employees = {};
+      const ids = [];
+      newEmployees.forEach(employee => {
+        ids.push(employee.id);
+        employees[employee.id] = employee;
+      });
       return {
         ...state,
-        employees: newEmployee
+        ids,
+        employees
       };
     }
     default:
       return state;
   }
 }
+
 // TODO refactor
 export interface State {
   employees: EmployeeState;
@@ -69,6 +63,7 @@ export const getSelected = (state: EmployeeState) => state.selected;
 export const reducers: ActionReducerMap<State> = {
   employees: employeesReducer
 };
+
 export function logger(reducer: ActionReducer<State>):
   ActionReducer<State> {
   return function (state: State, action: any): State {
@@ -77,5 +72,6 @@ export function logger(reducer: ActionReducer<State>):
     return reducer(state, action);
   };
 }
+
 export const metaReducers: MetaReducer<State>[] = [logger];
 
