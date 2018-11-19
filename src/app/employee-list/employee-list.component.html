@@ -1,0 +1,25 @@
+<div>
+  <h2>{{label}}</h2>
+
+  <div class="main-table">
+    <div class="table-item">
+      <div class="item-id">
+        id
+      </div>
+      <div class="item-name">
+        name
+      </div>
+      <div class="item-position">
+        position
+      </div>
+      <div class="item-rate">
+        rate
+      </div>
+    </div>
+
+    <app-employee-item *ngFor="let employee of employees"
+                       [employee]="employee"
+                       (select)="select.emit($event)">
+    </app-employee-item>
+  </div>
+</div>

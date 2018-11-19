@@ -5,7 +5,6 @@ import * as fromRoot from './store/employee/reducer';
 import * as employeeAction from './store/employee/actions';
 import * as employeeSelector from './store/employee/selector';
 import {Observable} from "rxjs";
-import {EmployeeState} from "./store/employee/reducer";
 
 @Component({
   selector: 'app-root',

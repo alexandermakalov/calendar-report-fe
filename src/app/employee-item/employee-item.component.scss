@@ -1,0 +1,25 @@
+.table-item {
+  > div {
+    display: inline-block;
+  }
+
+  .item-id {
+    min-width: 25px;
+    max-width: 45px;
+  }
+
+  .item-name {
+    min-width: 60px;
+    max-width: 80px;
+  }
+
+  .item-position {
+    min-width: 240px;
+    max-width: 260px;
+  }
+
+  .item-rate {
+    min-width: 60px;
+    max-width: 80px;
+  }
+}
