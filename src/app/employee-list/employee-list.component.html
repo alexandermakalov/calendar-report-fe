@@ -15,6 +15,11 @@
       <div class="item-rate">
         rate
       </div>
+      <div class="item-timetable-header">
+        <div *ngFor="let item of dayOfMonth" class="item-timetable">
+          {{item}}
+        </div>
+      </div>
     </div>
 
     <app-employee-item *ngFor="let employee of employees"

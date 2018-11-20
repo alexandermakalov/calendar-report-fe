@@ -1,5 +1,6 @@
 import * as fromEmployees from "./reducer";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
+import {Employee} from "../../model/employee";
 
 export const getEmployeeState =
   createFeatureSelector<fromEmployees.EmployeeState>('employees');
@@ -36,3 +37,17 @@ export const getAllEmployees = createSelector(
     return ids.map(id => employees[id]);
   }
 );
+
+export const getDayOfMonth = createSelector(
+  getEmployees,
+  (employees) => {
+    let dayOfMonth = [];
+    if (employees && (Object.keys(employees).length !== 0)) {
+      const firstEmployeeKey: string = Object.keys(employees)[0]; // TODO
+      const firstEmployee: Employee = employees[firstEmployeeKey]; // TODO
+      dayOfMonth = Object.keys(firstEmployee.timetable);
+    }
+    return dayOfMonth
+  }
+);
+

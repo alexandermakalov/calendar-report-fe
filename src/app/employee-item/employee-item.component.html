@@ -11,4 +11,9 @@
   <div class="item-rate">
     {{employee.rate}}
   </div>
+
+  <div *ngFor="let item of employee.timetable | keyvalue" class="item-timetable">
+    {{item.value}}
+  </div>
+
 </div>

@@ -12,6 +12,7 @@ import {Observable} from "rxjs";
     <main class="container">
       <app-employee-list
         [employees]="employees$ | async"
+        [dayOfMonth]="dayOfMonth$ | async"
         [label]="'Employee list'"
         (select)="onSelect($event)">
       </app-employee-list>
@@ -24,10 +25,12 @@ import {Observable} from "rxjs";
 export class AppComponent {
   employees$: Observable<Employee[]>;
   selected$: Observable<any>;
+  dayOfMonth$: Observable<string[]>;
 
   constructor(private store: Store<fromRoot.EmployeeState>) {
     this.employees$ = store.select(employeeSelector.getAllEmployees);
     this.selected$ = store.select(employeeSelector.getSelectedEmployee);
+    this.dayOfMonth$ = store.select(employeeSelector.getDayOfMonth);
     this.store.dispatch(new employeeAction.LoadEmployees());
   }
 

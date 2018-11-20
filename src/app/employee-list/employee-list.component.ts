@@ -12,6 +12,7 @@ import {Employee} from '../model/employee';
 })
 export class EmployeeListComponent implements OnInit, OnChanges {
   @Input() employees: Employee[];
+  @Input() dayOfMonth: string[];
   @Input() label: string;
   @Output() select = new EventEmitter();
 
