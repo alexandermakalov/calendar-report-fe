@@ -1,4 +1,4 @@
-interface TimeTable {
+export interface TimeTable {
   [day: number]: string
 }
 

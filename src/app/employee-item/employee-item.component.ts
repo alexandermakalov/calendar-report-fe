@@ -1,5 +1,6 @@
-import {Employee} from '../model/employee';
+import {Employee, TimeTable} from '../model/employee';
 import {Component, Input, OnInit, Output, EventEmitter} from "@angular/core";
+import _ from "lodash";
 
 @Component({
   selector: 'app-employee-item',
@@ -14,5 +15,15 @@ export class EmployeeItemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getWorkingHours(employeeTimeTable: TimeTable): number {
+    let totalWorkingHours = 0;
+    _.forEach(employeeTimeTable, (key) => {
+      if (_.isNumber(key)) {
+        totalWorkingHours += key;
+      }
+    });
+    return totalWorkingHours;
   }
 }
