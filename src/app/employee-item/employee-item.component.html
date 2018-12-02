@@ -1,4 +1,10 @@
-<div (click)="select.emit(employee.id)" class="table-item">
+<div class="table-item">
+  <div class="item-checkbox">
+    <input type="checkbox" name="options"
+           value="{{employee.id}}"
+           [checked]="false"
+           (click)="select.emit({ id: employee.id, checked: $event.target.checked })">
+  </div>
   <div class="item-id">
     {{employee.id}}
   </div>

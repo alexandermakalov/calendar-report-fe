@@ -16,7 +16,7 @@ import {Observable} from "rxjs";
         [label]="'Employee list'"
         (select)="onSelect($event)">
       </app-employee-list>
-      <app-employee-selected [employee]="selected$ | async">
+      <app-employee-selected [employees]="selected$ | async">
       </app-employee-selected>
     </main>
   `,
@@ -24,17 +24,21 @@ import {Observable} from "rxjs";
 })
 export class AppComponent {
   employees$: Observable<Employee[]>;
-  selected$: Observable<any>;
+  selected$: Observable<number[]>;
   dayOfMonth$: Observable<string[]>;
 
   constructor(private store: Store<fromRoot.EmployeeState>) {
     this.employees$ = store.select(employeeSelector.getAllEmployees);
-    this.selected$ = store.select(employeeSelector.getSelectedEmployee);
+    this.selected$ = store.select(employeeSelector.getSelectedEmployees);
     this.dayOfMonth$ = store.select(employeeSelector.getDayOfMonth);
     this.store.dispatch(new employeeAction.LoadEmployees());
   }
 
-  onSelect(id: number) {
-    this.store.dispatch(new employeeAction.Select(id));
+  onSelect({ id, checked }): void {
+    if (checked) {
+      this.store.dispatch(new employeeAction.Select(id));
+    } else {
+      this.store.dispatch(new employeeAction.Deselect(id))
+    }
   }
 }

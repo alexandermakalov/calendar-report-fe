@@ -5,13 +5,13 @@ import {Employee} from '../../model/employee';
 export interface EmployeeState {
   ids: number[];
   employees: { [id: number]: Employee };
-  selected: number;
+  selected: number[];
 }
 
 export const InitialEmployeeState: EmployeeState = {
   ids: [],
   employees: {},
-  selected: null,
+  selected: [],
 };
 
 export function employeesReducer(state = InitialEmployeeState,
@@ -26,10 +26,17 @@ export function employeesReducer(state = InitialEmployeeState,
       };
     }
     case employeeAction.SELECT: {
-      const id = action.payload;
+      const id: number = action.payload;
       return {
         ...state,
-        selected: id
+        selected: [...state.selected, id]
+      };
+    }
+    case employeeAction.DESELECT: {
+      const id: number = action.payload;
+      return {
+        ...state,
+        selected: [...state.selected.filter(item => item !== id)]
       };
     }
     case employeeAction.LOAD_EMPLOYEES_SUCCESS: {

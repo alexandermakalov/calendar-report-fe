@@ -2,6 +2,7 @@ import {Action} from '@ngrx/store';
 import {Employee} from '../../model/employee';
 
 export const SELECT = '[Employee] Select';
+export const DESELECT = '[Employee] Deselect';
 export const ADD_ONE = '[Employee] Add One';
 export const LOAD_EMPLOYEES = '[Employee] Load Employees';
 export const LOAD_EMPLOYEES_SUCCESS = '[Employee] Load Employees Success';
@@ -9,6 +10,13 @@ export const LOAD_EMPLOYEES_FAIL = '[Employee] Load Employees Fail';
 
 export class Select implements Action {
   readonly type = SELECT;
+
+  constructor(public payload: number) {
+  }
+}
+
+export class Deselect implements Action {
+  readonly type = DESELECT;
 
   constructor(public payload: number) {
   }
@@ -39,4 +47,4 @@ export class LoadEmployeesFail implements Action {
   }
 }
 
-export type Action = AddOne | Select | LoadEmployees | LoadEmployeesSuccess | LoadEmployeesFail;
+export type Action = AddOne | Select | LoadEmployees | LoadEmployeesSuccess | LoadEmployeesFail | Deselect;

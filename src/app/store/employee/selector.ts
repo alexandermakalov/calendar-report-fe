@@ -20,13 +20,10 @@ export const getSelected = createSelector(
   fromEmployees.getSelected,
 );
 
-export const getSelectedEmployee = createSelector(
+export const getSelectedEmployees = createSelector(
   getSelected,
-  getEmployees,
-  (selectedId, films) => {
-    return {
-      ...films[selectedId]
-    };
+  (selected) => {
+    return [...selected];
   }
 );
 

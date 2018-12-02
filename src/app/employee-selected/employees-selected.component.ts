@@ -1,19 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Employee } from '../model/employee';
 
 @Component({
   selector: 'app-employee-selected',
   template: `
-    <div *ngIf="employee && employee.name">
-      <h1>{{employee.name}}</h1>
+    <div *ngFor="let item of employees">
+      {{item}}
     </div>
   `,
   styles: []
 })
 
 export class EmployeeSelectedComponent implements OnInit {
-  @Input() employee: Employee;
-  constructor() { }
+  @Input() employees: number[];
+  JSON;
+  constructor() {
+    this.JSON = JSON;
+  }
 
   ngOnInit() {
   }
